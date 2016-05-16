@@ -1,0 +1,2 @@
+export LD_LIBRARY_PATH=/home/ckl/project/v6.3.5_20150803_api_tradeapi_linux64:LD_LIBRARY_PATH
+./a.out

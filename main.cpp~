@@ -1,0 +1,9 @@
+#include "CTPAPI.h"
+#include <iostream>
+using namespace std;
+
+int main(){
+  CTPAPI api;
+  cout << 0 << endl;
+  return 0;
+}

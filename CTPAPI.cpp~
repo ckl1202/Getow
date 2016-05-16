@@ -1,0 +1,37 @@
+#include "CTPAPI.h"
+
+CCTPAPI::CCTPAPI(){
+  strcpy(sBrokerID, "9999");
+  strcpy(sInvestorID, "041487");
+  strcpy(sPassword, "adec1202");
+  strcpy(sMarketDataPort, "10011");
+  strcpy(sTradePort, "10010");
+  nRequestID = 0;
+  
+  pUserApi = CThostFtdcMdApi::CreateFtdcMdApi();
+  pUserApi->RegisterSpi(this);
+  char sMarketAddress[50];
+  sprintf(sMarketAddress, "tcp://%s:%s", sAddress, sMarketDataPort);
+  pUserApi->RegisterFront(sMarketAddress);
+  pUserApi->Init();
+}
+
+CCTPAPI::~CCTPAPI(){
+}
+
+void CCTPAPI::OnFrontConnected(){
+}
+
+void CCTPAPI::ReqUserLogin(){
+}
+
+void CCTPAPI::OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin,
+			     CThostFtdcRspInfoField *pRspInfo,
+			     int nRequestID,
+			     bool bIsLast){
+}
+
+void CCTPAPI::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData){
+}
+
+int main
