@@ -5,13 +5,24 @@ CCTPAPI::CCTPAPI(){
  	strcpy(sInvestorID, "041487");
  	strcpy(sPassword, "adec1202");
   	strcpy(sAddress, "180.168.146.187");
-  	strcpy(sMarketDataPort, "10011");
-  	strcpy(sTradePort, "10010");
+  	strcpy(sMarketDataPort, "10010");
+  	strcpy(sTradePort, "10000");
   	nRequestID = 0;
 
 	insList.push_back("IF1609");
 	insList.push_back("IH1609");
 	insList.push_back("IC1609");
+	
+	char temp[100];
+	sprintf(temp, "IF1609.data");
+	FILE *file = fopen(temp, "w");
+	fclose(file);
+	sprintf(temp, "IH1609.data");
+	file = fopen(temp, "w");
+	fclose(file);
+	sprintf(temp, "IC1609.data");
+	file = fopen(temp, "w");	
+	fclose(file);
   
  	pUserApi = CThostFtdcMdApi::CreateFtdcMdApi();
  	pUserApi->RegisterSpi(this);
@@ -67,11 +78,25 @@ void CCTPAPI::OnRspUserLogin(CThostFtdcRspUserLoginField *pRspUserLogin,
 }
 
 void CCTPAPI::OnRtnDepthMarketData(CThostFtdcDepthMarketDataField *pDepthMarketData){
-	cout << pDepthMarketData->InstrumentID << endl;
+	if (pDepthMarketData == NULL) return;
+	char filename[100];
+	sprintf(filename, "%s.data", pDepthMarketData->InstrumentID);
+	FILE* file = fopen(filename, "a+");
+	fprintf(file, "%.3lf %.3lf %.3lf %d %d %d %.3lf %.0lf %s\n",
+		pDepthMarketData->LastPrice, 
+		pDepthMarketData->BidPrice1,
+		pDepthMarketData->AskPrice1,
+		pDepthMarketData->BidVolume1,
+		pDepthMarketData->AskVolume1,
+		pDepthMarketData->Volume,
+		pDepthMarketData->Turnover,
+		pDepthMarketData->OpenInterest,
+		pDepthMarketData->UpdateTime);
+	fclose(file);
 }
 
 int main(){
   CCTPAPI api;
-  while(1);
+  sleep(30000);
   return 0;
 }

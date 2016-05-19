@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <unistd.h>
 using namespace std;
 
 class CCTPAPI : public CThostFtdcMdSpi{
