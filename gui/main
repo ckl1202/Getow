@@ -2,16 +2,16 @@
 # -*- coding:utf-8 -*-
 
 from Tkinter import *
+from changeInsUI import changeInsList
 
 master = Tk()
 master.title('try')
 #master.geometry('350x450')
 
 def function1():
-	print 'function1'
-
+	tl = Toplevel()
 def function2():
-	print 'function2'
+	changeInsList()
 def function3():
 	print 'function3'
 
