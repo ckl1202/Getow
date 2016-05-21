@@ -9,5 +9,4 @@ def changeInsList():
 	insText.grid()
 	buttonSave = Button(root, text = "保存", command = root.destroy)
 	buttonSave.grid()
-	mainloop()
 
