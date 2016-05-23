@@ -1,12 +1,19 @@
 #include "CTPAPI.h"
 
 CCTPAPI::CCTPAPI(){
- 	strcpy(sBrokerID, "9999");
+	FILE *accountFile = fopen("account.in", "r");
+	fscanf(accountFile, "%s\n%s\n%s\n%s\n%s\n", 
+		sBrokerID,
+		sInvestorID,
+		sPassword,
+		sAddress,
+		sMarketDataPort);
+ 	/*strcpy(sBrokerID, "9999");
  	strcpy(sInvestorID, "041487");
  	strcpy(sPassword, "adec1202");
   	strcpy(sAddress, "180.168.146.187");
   	strcpy(sMarketDataPort, "10010");
-  	strcpy(sTradePort, "10000");
+  	strcpy(sTradePort, "10000");*/
   	nRequestID = 0;
 
 	FILE *insListFile = fopen("insList.in", "r");

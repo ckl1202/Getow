@@ -19,8 +19,8 @@ def GetInsText(insText):
 
 def SaveInsText(insText):
 #保存合约信息
-	insList = GetInsText(insText)
-	SaveNowIns(insList)
+	#insList = GetInsText(insText)
+	#SaveNowIns(insList)
 	tkMessageBox.showinfo(message = "保存成功")
 
 def changeInsList():
@@ -28,16 +28,12 @@ def changeInsList():
 	root = Tk()
 	insText = Text(root, width = 30, height = 15)
 	insText.grid(columnspan = 2)
-	buttonSave = Button(root, text = "保存", command = lambda: SaveInsText(insText))
-	buttonSave.grid()
-	buttonQuit = Button(root, text = "退出", command = root.destroy)
-	buttonQuit.grid(row = 1, column = 1)
+	SaveButton = Button(root, text = "保存", command = lambda: SaveInsText(insText))
+	SaveButton.grid()
+	QuitButton = Button(root, text = "退出", command = root.destroy)
+	QuitButton.grid(row = 1, column = 1)
 
 	insList = GetNowInsList()
 	for ins in insList:
 		insText.insert(END, ins)
 		insText.insert(END, '\n')
-	
-
-changeInsList()
-mainloop()

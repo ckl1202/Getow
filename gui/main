@@ -3,6 +3,7 @@
 
 from Tkinter import *
 from changeInsUI import changeInsList
+from changeAccUI import changeAccount
 
 master = Tk()
 master.title('Getow')
@@ -13,7 +14,7 @@ def function1():
 def function2():
 	changeInsList()
 def function3():
-	print 'function3'
+	changeAccount()
 
 buttonQuery = Button(master, text = "开始查询", command = function1)
 buttonQuery.grid(padx = 80, pady = 20)
