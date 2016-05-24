@@ -19,13 +19,14 @@ def GetInsText(insText):
 
 def SaveInsText(insText):
 #保存合约信息
-	#insList = GetInsText(insText)
-	#SaveNowIns(insList)
+	insList = GetInsText(insText)
+	SaveNewIns(insList)
 	tkMessageBox.showinfo(message = "保存成功")
 
 def changeInsList():
 #主界面
 	root = Tk()
+	root.title("修改合约信息")
 	insText = Text(root, width = 30, height = 15)
 	insText.grid(columnspan = 2)
 	SaveButton = Button(root, text = "保存", command = lambda: SaveInsText(insText))

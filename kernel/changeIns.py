@@ -12,7 +12,7 @@ def GetNowInsList():
 	insFile.close()
 	return insList
 
-def SaveNowIns(insList):
+def SaveNewIns(insList):
 	insFile = open("../dataGetter/insList.in", "w")
 	insFile.write(str(len(insList)))
 	insFile.write('\n')
