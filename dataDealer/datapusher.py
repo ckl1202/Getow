@@ -40,6 +40,7 @@ for ins in insList:
 		volume = int(parameters[5])
 		turnover = float(parameters[6])
 		openinterest = int(float(parameters[7]))
+		strtime = parameters[8]
 		time.strptime(parameters[8], '%H:%M:%S')
 		parameters = {'InstrumentID' : ins,
 				'lastPrice' : lastPrice,
@@ -57,8 +58,17 @@ for ins in insList:
 			line = f.readline
 			continue
 		tick = tick + 1
-		command = "insert into CTPLastPriceData values ('IC1609', '%s', %d, %f);" % (today, tick, lastPrice)
-		print command
+		command = "insert into CTPLastPriceData values ('%s', '%s', %d, %f);" % (ins, today, tick, lastPrice)
+		cur.execute(command)
+		command = "insert into CTPBidData values ('%s', '%s', %d, %f, %d);" %(ins, today, tick, bidPrice, bidVolume)
+		cur.execute(command)
+		command = "insert into CTPAskData values ('%s', '%s', %d, %f, %d);" %(ins, today, tick, askPrice, askVolume)
+		cur.execute(command)
+		command = "insert into CTPDealData values ('%s', '%s', %d, %d, %f);" %(ins, today, tick, volume, turnover)
+		cur.execute(command)
+		command = "insert into CTPPosData values ('%s', '%s', %d, %d);" %(ins, today, tick, openinterest)
+		cur.execute(command)
+		command = "insert into CTPTickTime values ('%s', '%s', %d, '%s');" %(ins, today, tick, strtime)
 		cur.execute(command)
 		line = f.readline()
 
