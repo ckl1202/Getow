@@ -24,3 +24,17 @@ CThostFtdcUserApiImplBase::OnSessionDisconnected[0x7f34ac0008e8][-1588723709][ 4
 Login successful
 CThostFtdcUserApiImplBase::OnSessionDisconnected[0x7f34ac0008e8][-1569456124][ 4097]
 Login successful
+wlan0: Success
+wlan0: Resource temporarily unavailable
+wlan0: Connection reset by peer
+wlan0: Connection reset by peer
+wlan0: Connection reset by peer
+wlan0: Resource temporarily unavailable
+Login successful
+CThostFtdcUserApiImplBase::OnSessionDisconnected[0x7fc1300008c8][-367067135][ 4097]
+CThostFtdcUserApiImplBase::OnSessionDisconnected[0x7fc1300212c8][953155586][ 4097]
+CThostFtdcUserApiImplBase::OnSessionDisconnected[0x7fc1300212c8][973144067][ 4097]
+CThostFtdcUserApiImplBase::OnSessionDisconnected[0x7fc1300212c8][1304231940][ 4097]
+Login successful
+CThostFtdcUserApiImplBase::OnSessionDisconnected[0x7fc1300212c8][1349124101][ 4097]
+Login successful

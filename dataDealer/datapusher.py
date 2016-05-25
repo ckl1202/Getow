@@ -1,4 +1,4 @@
-#!/bin/usr/python
+#!/usr/bin/python
 # -*- coding:utf-8 -*-
 import time
 import MySQLdb
@@ -6,14 +6,17 @@ import sys
 sys.path.append("../kernel")
 from changeIns import GetNowInsList
 
-def CheckDataValid(parameters):
-        if (parameters['lastPrice'] > 1000000) or (parameters['lastPrice'] < -1000000):
+def CheckDataValid(parameter, validTimes):
+        if (parameter['lastPrice'] > 1000000) or (parameter['lastPrice'] < -1000000):
 		return False
-	if (parameters['bidPrice'] > 1000000) or (parameters['bidPrice'] < -1000000):
+	if (parameter['bidPrice'] > 1000000) or (parameter['bidPrice'] < -1000000):
 		return False
-	if (parameters['askPrice'] > 1000000) or (parameters['askPrice'] < -1000000):
+	if (parameter['askPrice'] > 1000000) or (parameter['askPrice'] < -1000000):
 		return False
-	return True
+	for times in validTimes:
+		if times[0] <= parameter['time'] and parameter['time'] <= times[1]: 
+			return True
+	return False
 
 
 today = time.strftime("%Y-%m-%d", time.localtime())
@@ -25,12 +28,13 @@ insList = GetNowInsList()
 for ins in insList:
 	filename = "../dataGetter/%s.data" %ins
 	f = open(filename, "r")
-	line = f.readline()
-	line = f.readline()
 	tick = 0
+	command = "select beginTime, endTime from InsTime where Instrument = '%s'" %ins
+	cur.execute(command)
+	validTimes = cur.fetchall()
+	line = f.readline()
 
 	while line:
-	#从文件中获取数据
 		parameters = line.split()
 		lastPrice = float(parameters[0])
 		bidPrice = float(parameters[1])
@@ -40,9 +44,9 @@ for ins in insList:
 		volume = int(parameters[5])
 		turnover = float(parameters[6])
 		openinterest = int(float(parameters[7]))
-		strtime = parameters[8]
-		time.strptime(parameters[8], '%H:%M:%S')
-		parameters = {'InstrumentID' : ins,
+		time = parameters[8]
+		#time.strptime(parameters[8], '%H:%M:%S')
+		parameter = {'InstrumentID' : ins,
 				'lastPrice' : lastPrice,
 				'bidPrice' : bidPrice,
 				'askPrice' : askPrice,
@@ -52,10 +56,11 @@ for ins in insList:
 				'turnover' : turnover,
 				'openinterest' : openinterest, 
 				'time' : time}
-	#
-	#清洗数据
-		if (not CheckDataValid(parameters)):
-			line = f.readline
+		
+		
+		
+		if (not CheckDataValid(parameter, validTimes)):
+			line = f.readline()
 			continue
 		tick = tick + 1
 		command = "insert into CTPLastPriceData values ('%s', '%s', %d, %f);" % (ins, today, tick, lastPrice)
@@ -68,7 +73,7 @@ for ins in insList:
 		cur.execute(command)
 		command = "insert into CTPPosData values ('%s', '%s', %d, %d);" %(ins, today, tick, openinterest)
 		cur.execute(command)
-		command = "insert into CTPTickTime values ('%s', '%s', %d, '%s');" %(ins, today, tick, strtime)
+		command = "insert into CTPTickTime values ('%s', '%s', %d, '%s');" %(ins, today, tick, time)
 		cur.execute(command)
 		line = f.readline()
 
