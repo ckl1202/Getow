@@ -38,3 +38,5 @@ CThostFtdcUserApiImplBase::OnSessionDisconnected[0x7fc1300212c8][1304231940][ 40
 Login successful
 CThostFtdcUserApiImplBase::OnSessionDisconnected[0x7fc1300212c8][1349124101][ 4097]
 Login successful
+wlan0: Success
+Login successful
