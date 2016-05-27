@@ -11,10 +11,10 @@ date2 = '09:31'
 date3 = '09:32'
 date4 = '09:33'
 date5 = '09:34'
-date2 = datetime.strptime(date2, "%H:%M"))
-date3 = datetime.strptime(date3, "%H:%M"))
-date4 = datetime.strptime(date4, "%H:%M"))
-date5 = datetime.strptime(date5, "%H:%M"))
+date2 = date2num(datetime.strptime(date2, "%H:%M"))
+date3 = date2num(datetime.strptime(date3, "%H:%M"))
+date4 = date2num(datetime.strptime(date4, "%H:%M"))
+date5 = date2num(datetime.strptime(date5, "%H:%M"))
 
 
 openPrice = [2916.8, 2922.6, 2921.4, 2922.6, 2920.8]
@@ -29,13 +29,13 @@ price = [(date1, 2916.8, 2922.6, 2922.6, 2915.8),
 	(date4, 2922.6, 2920.8, 2922.6, 2920.8),
 	(date5, 2920.8, 2920.8, 2920.8, 2920.8)]
 
-fig = plt.figure()
+fig = plt.figure(figsize=(18, 9))
 ax = fig.add_subplot(2, 1, 1)
 ax.xaxis.set_major_locator(MinuteLocator())
 ax.xaxis.set_major_formatter(minuteFormatter)
 bx = fig.add_subplot(2, 1, 2)
-candlestick(ax, price, width = 0.07, colorup = 'r', colordown = 'g')
-candlestick(bx, price, width = 0.07, colorup = 'r', colordown = 'g')
+candlestick(ax, price, width = 0.000005, colorup = 'r', colordown = 'g')
+candlestick(bx, price, width = 0.00007, colorup = 'r', colordown = 'g')
 ax.autoscale_view()
 plt.show()
 
