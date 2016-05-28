@@ -14,7 +14,7 @@ def CheckDataValid(parameter, validTimes):
 	if (parameter['askPrice'] > 1000000) or (parameter['askPrice'] < -1000000):
 		return False
 	for times in validTimes:
-		if times[0] <= parameter['time'] and parameter['time'] <= times[1]: 
+		if times[0] <= parameter['time'] and parameter['time'] < times[1]: 
 			return True
 	return False
 

@@ -8,35 +8,20 @@ import sys
 sys.path.append("../kernel")
 from showData import GetMarketData
 
-date1 = '09:30'
-date1 = date2num(datetime.strptime(date1, "%H:%M"))
-date2 = '09:31'
-date3 = '09:32'
-date4 = '09:33'
-date5 = '09:34'
-date2 = date2num(datetime.strptime(date2, "%H:%M"))
-date3 = date2num(datetime.strptime(date3, "%H:%M"))
-date4 = date2num(datetime.strptime(date4, "%H:%M"))
-date5 = date2num(datetime.strptime(date5, "%H:%M"))
-
-
-openPrice = [2916.8, 2922.6, 2921.4, 2922.6, 2920.8]
-highPrice = [2922.6, 2922.6, 2922.8, 2922.6, 2920.8]
-lowPrice = [2915.8, 2920.0, 2921.4, 2920.8, 2920.8]
-closePrice = [2922.6, 2921.4, 2922.6, 2920.8, 2920.8]
 #candlestick: date open close high low
 minuteFormatter = DateFormatter('%H:%M')
-price = [(date1, 2916.8, 2922.6, 2922.6, 2915.8),
-	(date2, 2922.6, 2921.4, 2922.6, 2920.0),
-	(date3, 2921.4, 2922.6, 2922.8, 2921.4),
-	(date4, 2922.6, 2920.8, 2922.6, 2920.8),
-	(date5, 2920.8, 2920.8, 2920.8, 2920.8)]
 
 dics = GetMarketData('IF1609', '2016-05-28-09:30', '2016-05-28-11:30')
 datas = []
+labels = []
+#i = 600000
 for item in dics:
 	data = []
 	data.append(date2num(datetime.strptime(item['Time'][-5:], "%H:%M")))
+	#print data[0]
+	#data.append(i)
+	#i = i + 0.001
+	labels.append(item['Time'][-5:])
 	data.append(item['openPrice'])
 	data.append(item['closePrice'])
 	data.append(item['highPrice'])
@@ -45,14 +30,18 @@ for item in dics:
 
 fig = plt.figure(figsize = (18, 9))
 ax = fig.add_subplot(2, 1, 1)
-ax.xaxis.set_major_locator(MinuteLocator())
+ax.xaxis.set_major_locator(MinuteLocator(range(60), 10))
+ax.set_xlim([date2num(datetime.strptime('09:30', "%H:%M")), date2num(datetime.strptime('11:30', "%H:%M"))])
 ax.xaxis.set_major_formatter(minuteFormatter)
 bx = fig.add_subplot(2, 1, 2)
 
-candlestick(ax, datas, width = 0.0003, colorup = 'r', colordown = 'g')
-candlestick(bx, price, width = 0.07, colorup = 'r', colordown = 'g')
-ax.autoscale_view()
+#ax.xaxis.set_ticklabels(labels)
+candlestick(ax, datas, width = 0.0004, colorup = 'r', colordown = 'g')
+#ax.xaxis.set_ticks(labels)
+for label in ax.xaxis.get_ticklabels():
+	label.set_rotation(45)
+#ax.autoscale_view()
 plt.show()
 
 
-
+print 'test'
