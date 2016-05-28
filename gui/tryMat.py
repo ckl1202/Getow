@@ -48,6 +48,7 @@ ax = fig.add_subplot(2, 1, 1)
 ax.xaxis.set_major_locator(MinuteLocator())
 ax.xaxis.set_major_formatter(minuteFormatter)
 bx = fig.add_subplot(2, 1, 2)
+
 candlestick(ax, datas, width = 0.0003, colorup = 'r', colordown = 'g')
 candlestick(bx, price, width = 0.07, colorup = 'r', colordown = 'g')
 ax.autoscale_view()
