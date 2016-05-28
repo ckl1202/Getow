@@ -33,6 +33,7 @@ for ins in insList:
 	cur.execute(command)
 	validTimes = cur.fetchall()
 	line = f.readline()
+	datas = []
 
 	while line:
 		parameters = line.split()
@@ -59,24 +60,55 @@ for ins in insList:
 		
 		
 		
-		if (not CheckDataValid(parameter, validTimes)):
-			line = f.readline()
-			continue
-		tick = tick + 1
-		command = "insert into CTPLastPriceData values ('%s', '%s', %d, %f);" % (ins, today, tick, lastPrice)
-		cur.execute(command)
-		command = "insert into CTPBidData values ('%s', '%s', %d, %f, %d);" %(ins, today, tick, bidPrice, bidVolume)
-		cur.execute(command)
-		command = "insert into CTPAskData values ('%s', '%s', %d, %f, %d);" %(ins, today, tick, askPrice, askVolume)
-		cur.execute(command)
-		command = "insert into CTPDealData values ('%s', '%s', %d, %d, %f);" %(ins, today, tick, volume, turnover)
-		cur.execute(command)
-		command = "insert into CTPPosData values ('%s', '%s', %d, %d);" %(ins, today, tick, openinterest)
-		cur.execute(command)
-		command = "insert into CTPTickTime values ('%s', '%s', %d, '%s');" %(ins, today, tick, time)
-		cur.execute(command)
+		if (CheckDataValid(parameter, validTimes)):
+			datas.append(parameter)
+		#command = "insert into CTPLastPriceData values ('%s', '%s', %d, %f);" % (ins, today, tick, lastPrice)
+		#cur.execute(command)
+		#command = "insert into CTPBidData values ('%s', '%s', %d, %f, %d);" %(ins, today, tick, bidPrice, bidVolume)
+		#cur.execute(command)
+		#command = "insert into CTPAskData values ('%s', '%s', %d, %f, %d);" %(ins, today, tick, askPrice, askVolume)
+		#cur.execute(command)
+		#command = "insert into CTPDealData values ('%s', '%s', %d, %d, %f);" %(ins, today, tick, volume, turnover)
+		#cur.execute(command)
+		#command = "insert into CTPPosData values ('%s', '%s', %d, %d);" %(ins, today, tick, openinterest)
+		#cur.execute(command)
+		#command = "insert into CTPTickTime values ('%s', '%s', %d, '%s');" %(ins, today, tick, time)
+		#cur.execute(command)
 		line = f.readline()
+	
+	if (len(datas) != 0):
+		prevData = datas[0]
+		openPrice = prevData['lastPrice']
+		highPrice = openPrice
+		lowPrice = openPrice
+		volume = prevData['volume']
+		turnover = prevData['turnover']
+		for i in range(1, len(datas)):
+			nowData = datas[i]
+			if prevData['time'][:5] == nowData['time'][:5]:
+				if nowData['lastPrice'] > highPrice:
+					highPrice = nowData['lastPrice']
+				if nowData['lastPrice'] < lowPrice:
+					lowPrice = nowData['lastPrice']
+				volume = nowData['volume']
+				turnover = nowData['turnover']
+			else:
+				closePrice = prevData['lastPrice']
+				time = today + '-' + prevData['time'][:5]
+				print time, 
+				command = "insert into MarketData values ('%s', '%s', %f, %f, %f, %f, %d, %f);" \
+					% (ins, time, openPrice, closePrice, highPrice, lowPrice, volume, turnover)
+				cur.execute(command)
+				lowPrice = nowData['lastPrice']
+				highPrice = nowData['lastPrice']
+				openPrice = nowData['lastPrice']
+			prevData = nowData
+		time = today + '-' + prevData['time'][:5]
+		command = "insert into MarketData values ('%s', '%s', %f, %f, %f, %f, %d, %f);" \
+			% (ins, time, openPrice, closePrice, highPrice, lowPrice, volume, turnover)
+		cur.execute(command)
 
+					
 conn.commit()
 cur.close()
 conn.close()

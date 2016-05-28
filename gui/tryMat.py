@@ -4,6 +4,9 @@ import matplotlib.mlab as mlab
 from matplotlib.finance import candlestick
 from matplotlib.dates import date2num, MinuteLocator, DateFormatter
 from datetime import datetime
+import sys
+sys.path.append("../kernel")
+from showData import GetMarketData
 
 date1 = '09:30'
 date1 = date2num(datetime.strptime(date1, "%H:%M"))
@@ -29,12 +32,23 @@ price = [(date1, 2916.8, 2922.6, 2922.6, 2915.8),
 	(date4, 2922.6, 2920.8, 2922.6, 2920.8),
 	(date5, 2920.8, 2920.8, 2920.8, 2920.8)]
 
+dics = GetMarketData('IF1609', '2016-05-28-09:30', '2016-05-28-11:30')
+datas = []
+for item in dics:
+	data = []
+	data.append(date2num(datetime.strptime(item['Time'][-5:], "%H:%M")))
+	data.append(item['openPrice'])
+	data.append(item['closePrice'])
+	data.append(item['highPrice'])
+	data.append(item['lowPrice'])
+	datas.append(data)
+
 fig = plt.figure(figsize = (18, 9))
 ax = fig.add_subplot(2, 1, 1)
 ax.xaxis.set_major_locator(MinuteLocator())
 ax.xaxis.set_major_formatter(minuteFormatter)
 bx = fig.add_subplot(2, 1, 2)
-candlestick(ax, price, width = 0.000005, colorup = 'r', colordown = 'g')
+candlestick(ax, datas, width = 0.0003, colorup = 'r', colordown = 'g')
 candlestick(bx, price, width = 0.07, colorup = 'r', colordown = 'g')
 ax.autoscale_view()
 plt.show()
