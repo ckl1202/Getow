@@ -1,7 +1,7 @@
 #include "CTPAPI.h"
 
 CCTPAPI::CCTPAPI(){
-	FILE *accountFile = fopen("account.in", "r");
+	FILE *accountFile = fopen("../config/account.in", "r");
 	fscanf(accountFile, "%s\n%s\n%s\n%s\n%s\n", 
 		sBrokerID,
 		sInvestorID,
@@ -16,7 +16,7 @@ CCTPAPI::CCTPAPI(){
   	strcpy(sTradePort, "10000");*/
   	nRequestID = 0;
 
-	FILE *insListFile = fopen("insList.in", "r");
+	FILE *insListFile = fopen("../config/insList.in", "r");
 	int nNumOfIns;
 	fscanf(insListFile, "%d\n", &nNumOfIns);
 	for (int i = 0; i < nNumOfIns; ++i){

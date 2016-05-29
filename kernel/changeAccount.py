@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 
 def GetNowAccount():
-	accFile = open("../dataGetter/account.in", "r")
+	accFile = open("../config/account.in", "r")
 	brokerID = accFile.readline()[:-1]
 	userID = accFile.readline()[:-1]
 	password = accFile.readline()[:-1]
@@ -11,7 +11,7 @@ def GetNowAccount():
 	return brokerID, userID, password, address, marketPort
 
 def SaveNewAccount(brokerID, userID, password, address, marketPort):
-	accFile = open("../dataGetter/account.in", "w")
+	accFile = open("../config/account.in", "w")
 	accFile.write(str(brokerID))
 	accFile.write('\n')
 	accFile.write(userID)

@@ -27,7 +27,7 @@ def changeAccount():
 	brokerID, investorID, password, address, marketPort = GetNowAccount()
 	BrokerLabel = Label(root, text = "经纪公司代码")
 	BrokerLabel.grid(row = 0, column = 0, padx = 10, pady = 10, sticky = W)
-	BrokerEntry = Entry(root, text = "9999")
+	BrokerEntry = Entry(root)
 	BrokerEntry.grid(row = 0, column = 1, padx = 10, pady = 10)
 	BrokerEntry.insert(0, brokerID)
 

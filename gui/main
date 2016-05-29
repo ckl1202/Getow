@@ -4,6 +4,8 @@
 from Tkinter import *
 from changeInsUI import changeInsList
 from changeAccUI import changeAccount
+from changeDatabaseUI import changeDatabase
+from getQueryUI import Query
 
 master = Tk()
 master.title('Getow')
@@ -16,13 +18,16 @@ def function2():
 def function3():
 	changeAccount()
 
-buttonQuery = Button(master, text = "开始查询", command = function1)
+buttonQuery = Button(master, text = "开始查询", command = Query)
 buttonQuery.grid(padx = 80, pady = 20)
 
-buttonChangeIns = Button(master, text= "修改订阅合约信息", command = function2)
+buttonChangeDatabase = Button(master, text = "修改数据库配置信息", command = changeDatabase)
+buttonChangeDatabase.grid(padx = 80, pady = 20)
+
+buttonChangeIns = Button(master, text= "修改订阅合约信息", command = changeInsList)
 buttonChangeIns.grid(padx = 80, pady = 20)
 
-buttonChangeAccount = Button(master, text = "修改CTP账户", command = function3)
+buttonChangeAccount = Button(master, text = "修改CTP账户", command = changeAccount)
 buttonChangeAccount.grid(padx = 80, pady = 20)
 
 buttonQuit = Button(master, text = "退出", command = quit)

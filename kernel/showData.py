@@ -1,16 +1,20 @@
 #!/usr/bin/python
 # -*- coding:utf-8 -*-
 import MySQLdb
+import sys
+sys.path.append("../kernel")
+from changeDatabase import GetNowDatabase
 
-def GetMarketData(ins, beginTime, endTime):
-	conn = MySQLdb.connect(host='localhost', user='root', passwd='adec1202', db='futures', port=3306)
+def GetMarketData(ins, beginTime, num):
+	myHost, myUser, myPassword, myDB, myPort = GetNowDatabase()
+	conn = MySQLdb.connect(host=myHost, user=myUser, passwd=myPassword, db=myDB, port=int(myPort))
 	cur = conn.cursor()
-	command = "select * from MarketData where Instrument = '" + ins + "' and time >= '" + beginTime + "' and time <= '" + endTime + "';"
-	#print command 
+	command = "select * from MarketData where Instrument = '" + ins + "' and time >= '" + beginTime + "';"
+	print command 
 	cur.execute(command)
 	datas = cur.fetchall()
 	dics = []
-	for i in range(len(datas)):
+	for i in range(num):
 		data = datas[i]
 		dic = {'InstrumentID' : data[0],
 			'Time' : data[1],
@@ -22,7 +26,4 @@ def GetMarketData(ins, beginTime, endTime):
 			'turnover' : data[7] }
 		dics.append(dic)
 	return dics
-		
 
-
-GetMarketData('IF1609', '2016-05-28-10:00', '2016-05-28-11:30')

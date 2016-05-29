@@ -14,7 +14,7 @@ minuteFormatter = DateFormatter('%H:%M')
 dics = GetMarketData('IF1609', '2016-05-28-09:30', '2016-05-28-15:00')
 datas = []
 labels = []
-i = 0
+i = 1
 for item in dics:
 	data = []
 	#data.append(date2num(datetime.strptime(item['Time'][-5:], "%H:%M")))
@@ -39,9 +39,7 @@ bx = fig.add_subplot(2, 1, 2)
 #candlestick(ax, datas, width = 0.0004, colorup = 'r', colordown = 'g')
 candlestick(ax, datas, width = 0.4, colorup = 'r', colordown = 'g')
 for label in ax.xaxis.get_ticklabels():
-	print type(label)
+	print (label.get_text())
 ax.autoscale_view()
 plt.show()
 
-
-print 'test'

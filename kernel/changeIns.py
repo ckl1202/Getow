@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 
 def GetNowInsList():
-	insFile = open("../dataGetter/insList.in", "r")
+	insFile = open("../config/insList.in", "r")
 	a = int(insFile.readline())
 	insList = []
 	for i in range(0, a):
@@ -13,7 +13,7 @@ def GetNowInsList():
 	return insList
 
 def SaveNewIns(insList):
-	insFile = open("../dataGetter/insList.in", "w")
+	insFile = open("../config/insList.in", "w")
 	insFile.write(str(len(insList)))
 	insFile.write('\n')
 	for item in insList:

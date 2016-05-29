@@ -5,6 +5,7 @@ import MySQLdb
 import sys
 sys.path.append("../kernel")
 from changeIns import GetNowInsList
+from changeDatabase import GetNowDatabase
 
 def CheckDataValid(parameter, validTimes):
         if (parameter['lastPrice'] > 1000000) or (parameter['lastPrice'] < -1000000):
@@ -20,7 +21,8 @@ def CheckDataValid(parameter, validTimes):
 
 
 today = time.strftime("%Y-%m-%d", time.localtime())
-conn = MySQLdb.connect(host='localhost', user='root', passwd='adec1202', db='futures', port=3306)
+myHost, myUser, myPassword, myDB, myPort = GetNowDatabase()
+conn = MySQLdb.connect(host=myHost, user=myUser, passwd=myPassword, db=myDB, port=int(myPort))
 cur = conn.cursor()
 
 
