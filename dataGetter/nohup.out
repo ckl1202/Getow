@@ -41,3 +41,32 @@ Login successful
 wlan0: Success
 Login successful
 wlan0: Success
+wlan0: Success
+wlan0: Resource temporarily unavailable
+wlan0: Connection reset by peer
+wlan0: Connection reset by peer
+wlan0: Connection reset by peer
+wlan0: Connection reset by peer
+wlan0: Resource temporarily unavailable
+wlan0: Connection reset by peer
+wlan0: Connection reset by peer
+wlan0: Connection reset by peer
+wlan0: Connection reset by peer
+wlan0: Connection reset by peer
+wlan0: Connection reset by peer
+Login successful
+CThostFtdcUserApiImplBase::OnSessionDisconnected[0x7f152c0008c8][-1870331903][ 4097]
+CThostFtdcUserApiImplBase::OnSessionDisconnected[0x7f152c0008c8][-284360702][ 4097]
+CThostFtdcUserApiImplBase::OnSessionDisconnected[0x7f152c0008c8][-264372221][ 4097]
+CThostFtdcUserApiImplBase::OnSessionDisconnected[0x7f152c0008c8][-225050620][ 4097]
+CThostFtdcUserApiImplBase::OnSessionDisconnected[0x7f152c0008c8][-185794555][ 4097]
+Login successful
+CThostFtdcUserApiImplBase::OnSessionDisconnected[0x7f152c0008c8][-168361978][ 4097]
+CThostFtdcUserApiImplBase::OnSessionDisconnected[0x7f152c0008c8][-55443449][ 4097]
+CThostFtdcUserApiImplBase::OnSessionDisconnected[0x7f152c0008c8][-33685496][ 4097]
+CThostFtdcUserApiImplBase::OnSessionDisconnected[0x7f152c0008c8][-9764855][ 4097]
+CThostFtdcUserApiImplBase::OnSessionDisconnected[0x7f152c0008c8][25493514][ 4097]
+CThostFtdcUserApiImplBase::OnSessionDisconnected[0x7f152c0008c8][49414155][ 4097]
+CThostFtdcUserApiImplBase::OnSessionDisconnected[0x7f152c0008c8][70713356][ 4097]
+CThostFtdcUserApiImplBase::OnSessionDisconnected[0x7f152c0008c8][90374157][ 4097]
+wlan0: Success
