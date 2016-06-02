@@ -9,6 +9,7 @@ from changeInsTime import *
 from Tkinter import *
 
 
+
 def selectIns(insListbox, insTimeText):
 	insName = insListbox.get(insListbox.curselection())
 	insTime = GetInsTime(insName)
@@ -30,8 +31,15 @@ def changeInsTime():
 
 	insTimeText = Text(root)
 	insTimeText.grid(row = 0, column = 1)
+	insTime = []
 	for item in insList:
 		insListbox.insert(END, item)
+		thisInsTime = GetInsTime(item)
+		insStr = ''
+		for time in thisInsTime:
+			insStr = insStr + time['beginTime'] + '-' + time['endTime'] + '\n'
+		insTime.append(insStr)
+
 
 	SaveButton = Button(root, text = "保存", command = root.destroy)
 	SaveButton.grid(row = 1, column = 0, padx = 10, pady = 10, sticky = W)
