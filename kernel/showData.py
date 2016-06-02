@@ -14,7 +14,8 @@ def GetMarketData(ins, beginTime, num):
 	cur.execute(command)
 	datas = cur.fetchall()
 	dics = []
-	if (num > len(datas)) num = len(datas)
+	if (num > len(datas)):
+		num = len(datas)
 	for i in range(num):
 		data = datas[i]
 		dic = {'InstrumentID' : data[0],

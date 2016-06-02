@@ -69,5 +69,5 @@ def changeInsTime():
 	insListbox.bind("<<ListboxSelect>>", lambda(event) : selectIns(insListbox, insTimeText, insTime))
 
 nLine = -1
-changeInsTime()
-mainloop()
+#changeInsTime()
+#mainloop()
