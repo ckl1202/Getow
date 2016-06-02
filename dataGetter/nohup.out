@@ -97,3 +97,4 @@ Login successful
 CThostFtdcUserApiImplBase::OnSessionDisconnected[0x7fc5c40008c8][617742337][ 4097]
 CThostFtdcUserApiImplBase::OnSessionDisconnected[0x7fc5c40008c8][-1739456510][ 4097]
 CThostFtdcUserApiImplBase::OnSessionDisconnected[0x7fc5c40008c8][-1719664637][ 4097]
+wlan0: Success
