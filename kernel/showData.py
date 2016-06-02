@@ -26,5 +26,7 @@ def GetMarketData(ins, beginTime, num):
 			'volume' : data[6],
 			'turnover' : data[7] }
 		dics.append(dic)
+	cur.close()
+	conn.close()
 	return dics
 
