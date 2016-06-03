@@ -17,9 +17,11 @@ def selectIns(insListbox, insTimeText, insTime):
 	nLine = insListbox.curselection()[0]
 	insTimeText.delete(1.0, END)
 	insTimeText.insert(END, insTime[nLine])
+	#print 'test'
 	
-def saveIns(insList, insTime):
-	print insList
+def saveIns(insList, insTime, insListbox, insTimeText):
+	#print insList
+	selectIns(insListbox, insTimeText, insTime)
 	for i in range(len(insTime)):
 		#获取这个合约的时间
 		thisInsTime = insTime[i]
@@ -61,7 +63,7 @@ def changeInsTime():
 		insTime.append(insStr)
 
 
-	SaveButton = Button(root, text = "保存", command = lambda: saveIns(insList, insTime))
+	SaveButton = Button(root, text = "保存", command = lambda: saveIns(insList, insTime, insListbox, insTimeText))
 	SaveButton.grid(row = 1, column = 0, padx = 10, pady = 10, sticky = W)
 	QuitButton = Button(root, text = "退出", command = root.destroy)
 	QuitButton.grid(row = 1, column = 1, padx = 10, pady = 10, sticky = E)
