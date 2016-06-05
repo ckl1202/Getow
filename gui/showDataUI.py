@@ -1,3 +1,5 @@
+# -*- coding:utf-8 -*-
+
 import matplotlib.pyplot as plt
 import matplotlib.mlab as mlab
 
@@ -26,4 +28,16 @@ def QueryAndShowData(ins, beginTime, num):
 	ax = fig.add_subplot(211)
 	candlestick(ax, datas, width = 0.4, colorup = 'r', colordown = 'g')
 	ax.autoscale_view()
+
+	volumeX = fig.add_subplot(212)
+	datas = []
+	index = []
+	i = 1
+	for item in dics:
+		index.append(i)
+		i = i + 1
+		datas.append(item['volume'])
+	volumeX.set_xlim(0, num)
+	plt.bar(index, datas, 0.5, color = 'r', label = '成交量')
+		
 	plt.show()
