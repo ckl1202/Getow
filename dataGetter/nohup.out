@@ -136,3 +136,5 @@ CThostFtdcUserApiImplBase::OnSessionDisconnected[0x7fd9b80008c8][1076494345][ 40
 ./runscript: 1: ./runscript: Syntax error: word unexpected (expecting ")")
 wlan0: Success
 Login successful
+wlan0: Success
+Login successful
